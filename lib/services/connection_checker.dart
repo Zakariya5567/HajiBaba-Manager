@@ -3,6 +3,9 @@ import 'package:data_connection_checker/data_connection_checker.dart';
 
 class ConnectionChecker{
 
+  // the connection class is to check the connection when the user
+  // want to access data from the api
+
   Future<bool> checkNetwork() async {
     var connectivityResult = await (Connectivity().checkConnectivity());
     if (connectivityResult == ConnectivityResult.mobile) {

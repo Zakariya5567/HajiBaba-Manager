@@ -6,6 +6,10 @@ import 'package:haji_baba_manager/Utils/const_style.dart';
 import 'package:haji_baba_manager/Utils/const_text.dart';
 import 'package:provider/provider.dart';
 class SearchBottomSheet{
+
+  // this class is used to when the user click on search icon of bottom navigation bar
+  // when click on the search icon this bottom sheet will araise
+
   TextEditingController searchController=TextEditingController();
   showSearchBottomSheet(BuildContext context) {
    return

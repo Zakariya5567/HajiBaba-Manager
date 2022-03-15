@@ -6,6 +6,11 @@ import 'package:haji_baba_manager/Utils/api_url.dart';
 import 'package:http/http.dart'as http;
 class OrderStatusApi{
 
+  // AllStatusListModel is the instance of allStatusListModel class;
+  // UpdateStatusModel is the instance of updateStatusModel class;
+  // getAllStatusList function is used the order status from the api
+  //updateStatusById function is used update order status
+
 AllStatusListModel allStatusListModel;
 UpdateStatusModel updateStatusModel;
 

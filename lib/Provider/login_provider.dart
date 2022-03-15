@@ -7,6 +7,10 @@ import 'package:haji_baba_manager/services/login_api.dart';
 
 class LoginProvider extends ChangeNotifier  {
 
+    // UserModel is the instance of userModel class
+    // isLoading is used to wait when the data is in loading form
+   //  loading method is used to update the isLoading variable in running time
+
     UserModel userData=UserModel();
 
     int loading=0;
@@ -14,14 +18,13 @@ class LoginProvider extends ChangeNotifier  {
     loadingData(int number){
         notifyListeners();
         loading=number;
-
     }
 
     //Connection checker is the instance of connection checker class
     // in which we are listening that the internet in connected or not
     //ConnectionCheckerDialog is the instance of ConnectionCheckerDialog class
     // if the network is not connected the alert dialog will be popup
-
+    // postLogin method is used for login to call login api
     ConnectionChecker connectionChecker=ConnectionChecker();
     ConnectionCheckerDialog connectionCheckerDialog=ConnectionCheckerDialog();
 

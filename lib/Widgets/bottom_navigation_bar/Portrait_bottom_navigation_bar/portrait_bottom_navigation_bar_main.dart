@@ -2,13 +2,11 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haji_baba_manager/Provider/dashboard_provider.dart';
-import 'package:haji_baba_manager/Provider/manager_profile_provider.dart';
 import 'package:haji_baba_manager/Provider/order_screen_provider.dart';
 import 'package:haji_baba_manager/Provider/profile_provider.dart';
 import 'package:haji_baba_manager/Utils/const_style.dart';
 import 'package:haji_baba_manager/Utils/const_text.dart';
 import 'package:haji_baba_manager/Widgets/search_bottom_sheet.dart';
-import 'package:haji_baba_manager/Widgets/side_menu_bar/portrait_side_bar/portrait_side_bar.dart';
 import 'package:provider/provider.dart';
 
 class PortraitBottomNavigationBar extends StatelessWidget {

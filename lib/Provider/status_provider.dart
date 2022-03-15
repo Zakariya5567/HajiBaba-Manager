@@ -6,9 +6,18 @@ import 'package:haji_baba_manager/services/connection_checker.dart';
 import 'package:haji_baba_manager/services/order_status_api.dart';
 class StatusProvider extends ChangeNotifier{
 
+  //OrderStatusApi is the instance of theOrderStatusApi class
+  //statusList is a list to store the data of the status
+  //selectedValue is the current value(name) of the selected value of the dropdown
+  // change value is used to update the value on run time when the user select any status
+  //isLoading and loading will used when the data is loading from api
+  // id is the id of dropdown in the list it will change on run time when the user click
+  // on the item and the change id  method is used to update
+
   OrderStatusApi orderStatusApi=OrderStatusApi();
 
   List statusList=[];
+
   String selectedValue='';
 
   int isLoading=0;
@@ -34,6 +43,8 @@ class StatusProvider extends ChangeNotifier{
   // in which we are listening that the internet in connected or not
   //ConnectionCheckerDialog is the instance of ConnectionCheckerDialog class
   // if the network is not connected the alert dialog will be popup
+  //getAllStatus method is to call the api and get the status
+  //updateOrderStatus method is used to call the api and update the status of order
 
   ConnectionChecker connectionChecker=ConnectionChecker();
   ConnectionCheckerDialog connectionCheckerDialog=ConnectionCheckerDialog();

@@ -9,6 +9,12 @@ class SplashScreen extends StatefulWidget {
   _SplashScreenState createState() => _SplashScreenState();
 }
 class _SplashScreenState extends State<SplashScreen> {
+
+  // login function is used to check the user is already login or not
+  // if the user is already login it will navigate to the dashboard
+  // or if the user is not login it will navigate to the login screen
+  // duration is the time for splach screen
+
    SharedPreferencesData sharedPreferencesData =SharedPreferencesData();
 
    void login()async{

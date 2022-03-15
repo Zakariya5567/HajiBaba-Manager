@@ -2,7 +2,6 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haji_baba_manager/Model/user_model.dart';
-import 'package:haji_baba_manager/Provider/internet_provider.dart';
 import 'package:haji_baba_manager/Provider/login_provider.dart';
 import 'package:haji_baba_manager/Utils/const_style.dart';
 import 'package:haji_baba_manager/Utils/const_text.dart';

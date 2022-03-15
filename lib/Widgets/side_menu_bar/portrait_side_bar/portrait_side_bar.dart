@@ -22,8 +22,6 @@ class PortraitSideBar extends StatelessWidget {
                   width: 700.w,
                   color: Colors.white,
                   child:
-                  // controller.isLoading == 0
-                  //     ?
                   Column(
                     crossAxisAlignment: CrossAxisAlignment.start,
                     mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -38,14 +36,14 @@ class PortraitSideBar extends StatelessWidget {
                       // logOutButton(context),
                     ],
                   )
-          //       : const Center(
-          // child: CircularProgressIndicator(
-          // color: Colors.deepOrangeAccent,
-          // ),
-          // ),
                 );
         });
   }
+
+  // to find the widgets easily i have created this three widgets
+  // profile app bar widgets is the app bar of the screen
+  // orderListButton have all text button(all,pending,processing,complete,ready for collection
+  // counterName have the store name , store address, phone number and logout button
 
   Widget profileAppBar(BuildContext context) {
     return Consumer<ProfileProvider>(builder: (context, controller, child) {
@@ -337,6 +335,8 @@ class PortraitSideBar extends StatelessWidget {
     });
   }
 
+  // counterNameTextStyle is the style of counter text
+  //loadingIndicator is the progress indicator bar
   counterNameTextStyle() {
     return TextStyle(
       color: ConstStyle.textGreyColor,

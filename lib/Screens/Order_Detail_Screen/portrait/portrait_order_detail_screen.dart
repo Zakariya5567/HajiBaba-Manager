@@ -1,11 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:haji_baba_manager/Provider/internet_provider.dart';
 import 'package:haji_baba_manager/Provider/order_detail_provider.dart';
 import 'package:haji_baba_manager/Utils/const_style.dart';
 import 'package:haji_baba_manager/Utils/const_text.dart';
 import 'package:haji_baba_manager/Widgets/bottom_navigation_bar/Portrait_bottom_navigation_bar/portrait_bottom_navigation_bar_main.dart';
-import 'package:haji_baba_manager/Widgets/side_menu_bar/side_menu_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
 
@@ -13,11 +11,8 @@ import 'package:provider/provider.dart';
 class PortraitOrderDetailScreen extends StatelessWidget {
   PortraitOrderDetailScreen({Key key}) : super(key: key);
 
- // InternetProvider internetProvider=InternetProvider();
-
   @override
   Widget build(BuildContext context) {
-   // internetProvider.internetChecker(context);
     return  Scaffold(
       backgroundColor: ConstStyle.cardGreyColor,
       appBar: AppBar(
@@ -39,7 +34,8 @@ class PortraitOrderDetailScreen extends StatelessWidget {
         title:
         Consumer<OrderDetailProvider>(
           builder: (context,controller,child) {
-            return Text("${ConstText.orderIdText}${controller.orderDetail['refNumber']==null
+            return Text("${ConstText.orderIdText}"
+                "${controller.orderDetail['refNumber']==null
                 ? "" :controller.orderDetail['refNumber']}",
               style:orderIdStyle(),
             );
@@ -47,13 +43,11 @@ class PortraitOrderDetailScreen extends StatelessWidget {
         ),
 
       ),
-      drawer: SideMenuBar(),
       body: Padding(
         padding: EdgeInsets.symmetric(
           horizontal: 60.w,
           vertical: 50.h,
         ),
-        // list view is used to show all detail in list
         child:
               Consumer<OrderDetailProvider>(
               builder: (context,controller,child) {
@@ -61,6 +55,7 @@ class PortraitOrderDetailScreen extends StatelessWidget {
                 return controller.isLoading==0 ?
                 ListView(
                   children: [
+                    // list view is used to show all detail in list
                     // calling to order item list
                     orderItem(context,controller, total),
                     sizedBox60(),
@@ -89,9 +84,18 @@ class PortraitOrderDetailScreen extends StatelessWidget {
             ),
 
       ),
+      //PortraitBottomNavigationBar is a class in which i define the bottom navigation bar
       bottomNavigationBar:  PortraitBottomNavigationBar(),
     );
   }
+
+  // in this detail screen here is 6 types of detail about order
+  // order item is the list of all item of the order
+  // order detail is the detail of the order
+  // customer detail is the detail of the customer
+  // billing detail is the detail of the  the order
+  // paymentInformation is the detail of the payment method
+  // orderSummery is the detail of the order summery
 
   Widget orderItem(BuildContext context,OrderDetailProvider controller, double total,) {
     return Column(
@@ -599,78 +603,17 @@ class PortraitOrderDetailScreen extends StatelessWidget {
 
   }
 
-  orderDetailTitleStyle(){
-    return  TextStyle(
-      color: ConstStyle.textBlackColor,
-      fontFamily: ConstStyle.poppins,
-      fontSize: 46.sp,
-      fontWeight: FontWeight.w700,
-    );
-  }
+// getFormattedDate is a function to format the data style
+// orderDetailTitleStyle  is the style of titles of the detail
+// orderNameTextStyle is the style of  order name
+// listBlackTextStyle is the style of  which are the text is black in detail
+// listGreyTextStyle is the style of  which are the text is grey in detail
+// sizedBox60  is used for space between widgets
+// paddingSpace is used for padding
+// addressStyle  is the style of  address of the user detail
+// orderIdStyle  is the style of  order id text style
+// orangeTextStyle is the style of orange color text
 
-  orderNameTextStyle(){
-    return TextStyle(
-      color: ConstStyle.textGreyColor,
-      fontFamily: ConstStyle.poppins,
-      fontSize: 40.sp,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  listBlackTextStyle(){
-    return TextStyle(
-      color: ConstStyle.textBlackColor,
-      fontFamily: ConstStyle.poppins,
-      fontSize: 40.sp,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  listGreyTextStyle(){
-    return TextStyle(
-      color: ConstStyle.textGreyColor,
-      fontFamily: ConstStyle.poppins,
-      fontSize: 40.sp,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  sizedBox60(){
-    return SizedBox(height: 50.h,);
-  }
-
-  paddingSpace(){
-    return EdgeInsets.symmetric(
-        horizontal: 40.sp,
-        vertical: 60.h);
-  }
-
-  addressStyle(){
-    return TextStyle(
-      color: ConstStyle.textGreyColor,
-      fontFamily: ConstStyle.poppins,
-      fontSize: 40.sp,
-      fontWeight: FontWeight.w500,
-    );
-  }
-
-  orderIdStyle(){
-    return  TextStyle(
-      color: ConstStyle.textBlackColor,
-      fontFamily: ConstStyle.poppins,
-      fontSize: 60.sp,
-      fontWeight: FontWeight.bold,
-    );
-  }
-
-  orangeTextStyle(){
-    return TextStyle(
-      color: ConstStyle.textOrangeColor,
-      fontFamily: ConstStyle.poppins,
-      fontSize: 40.sp,
-      fontWeight: FontWeight.bold,
-    );
-  }
   String getFormattedDate(String date) {
     /// Convert into local date format.
     var localDate = DateTime.parse(date).toLocal();
@@ -681,5 +624,69 @@ class PortraitOrderDetailScreen extends StatelessWidget {
     var outputDate = outputFormat.format(inputDate);
 
     return outputDate.toString();
+  }
+  orderDetailTitleStyle(){
+    return  TextStyle(
+      color: ConstStyle.textBlackColor,
+      fontFamily: ConstStyle.poppins,
+      fontSize: 46.sp,
+      fontWeight: FontWeight.w700,
+    );
+  }
+  orderNameTextStyle(){
+    return TextStyle(
+      color: ConstStyle.textGreyColor,
+      fontFamily: ConstStyle.poppins,
+      fontSize: 40.sp,
+      fontWeight: FontWeight.bold,
+    );
+  }
+  listBlackTextStyle(){
+    return TextStyle(
+      color: ConstStyle.textBlackColor,
+      fontFamily: ConstStyle.poppins,
+      fontSize: 40.sp,
+      fontWeight: FontWeight.bold,
+    );
+  }
+  listGreyTextStyle(){
+    return TextStyle(
+      color: ConstStyle.textGreyColor,
+      fontFamily: ConstStyle.poppins,
+      fontSize: 40.sp,
+      fontWeight: FontWeight.bold,
+    );
+  }
+  sizedBox60(){
+    return SizedBox(height: 50.h,);
+  }
+  paddingSpace(){
+    return EdgeInsets.symmetric(
+        horizontal: 40.sp,
+        vertical: 60.h);
+  }
+  addressStyle(){
+    return TextStyle(
+      color: ConstStyle.textGreyColor,
+      fontFamily: ConstStyle.poppins,
+      fontSize: 40.sp,
+      fontWeight: FontWeight.w500,
+    );
+  }
+  orderIdStyle(){
+    return  TextStyle(
+      color: ConstStyle.textBlackColor,
+      fontFamily: ConstStyle.poppins,
+      fontSize: 60.sp,
+      fontWeight: FontWeight.bold,
+    );
+  }
+  orangeTextStyle(){
+    return TextStyle(
+      color: ConstStyle.textOrangeColor,
+      fontFamily: ConstStyle.poppins,
+      fontSize: 40.sp,
+      fontWeight: FontWeight.bold,
+    );
   }
 }

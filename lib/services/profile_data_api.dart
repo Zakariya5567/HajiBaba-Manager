@@ -7,6 +7,12 @@ import 'package:http/http.dart'as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class ProfileApi{
+
+  //  StoreManagerById is the instance of  storeManagerById class;
+  //   ResetPasswordModel is the instance of resetPasswordModel class;
+  //  getStoreManagerById method is use to get store manger data from the api
+  //  requestResetPassword method request to reset the manger password
+
   StoreManagerById storeManagerById;
   ResetPasswordModel resetPasswordModel;
 

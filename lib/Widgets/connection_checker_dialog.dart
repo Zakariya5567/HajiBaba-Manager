@@ -3,6 +3,10 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haji_baba_manager/Utils/const_style.dart';
 
 class ConnectionCheckerDialog{
+
+  // this class is only this showConnectionDialog method it will call when the
+  // user call api and no network connection it will be popUp
+
   showConnectionDialog(BuildContext context, ) {
     AlertDialog alert = AlertDialog(
       backgroundColor: ConstStyle.cardGreyColor,

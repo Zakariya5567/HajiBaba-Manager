@@ -8,6 +8,13 @@ import 'package:haji_baba_manager/services/order_detial_api.dart';
 
 class DashboardProvider extends ChangeNotifier{
 
+// OrderDetailApi is the instance of orderDetailApi class
+// DashboardApi is the instance of dashboardApi class
+// todayOrderList is to store the list of today order which is present in the map of the dashboard
+// dashboardDetailData is to store all the data of which is get from the api
+// isLoading is used to wait when the data is in loading form
+//  loading method is used to update the isLoading variable in running time
+
   OrderDetailApi orderDetailApi=OrderDetailApi();
   DashboardApi dashboardApi=DashboardApi();
   List todayOrderList=[];
@@ -24,6 +31,7 @@ class DashboardProvider extends ChangeNotifier{
   // in which we are listening that the internet in connected or not
   //ConnectionCheckerDialog is the instance of ConnectionCheckerDialog class
   // if the network is not connected the alert dialog will be popup
+  //getDashboardDetail method is used to get the dashboard data from the api
 
   ConnectionChecker connectionChecker=ConnectionChecker();
   ConnectionCheckerDialog connectionCheckerDialog=ConnectionCheckerDialog();

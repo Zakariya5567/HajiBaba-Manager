@@ -1,7 +1,6 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:haji_baba_manager/Provider/internet_provider.dart';
 import 'package:haji_baba_manager/Provider/login_provider.dart';
 import 'package:haji_baba_manager/Utils/const_style.dart';
 import 'package:haji_baba_manager/Utils/const_text.dart';
@@ -12,8 +11,6 @@ import 'package:provider/provider.dart';
 class PortraitLoginFormScreen extends StatelessWidget {
   PortraitLoginFormScreen({Key key}) : super(key: key);
 
-  //InternetProvider internetProvider=InternetProvider();
-
   final formKey=GlobalKey<FormState>();
 
   //Editing controller for email and password
@@ -22,7 +19,6 @@ class PortraitLoginFormScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-   // internetProvider.internetChecker(context);
     return Scaffold(
       body: Container(
         width: MediaQuery.of(context).size.width,
@@ -74,14 +70,6 @@ class PortraitLoginFormScreen extends StatelessWidget {
                     signInForm(),
                     SizedBox(height: 80.h,),
                     //login button
-                    // isLoading ? new PrimaryButton(
-                    //     key: new Key('login'),
-                    //     text: 'Login',
-                    //     height: 44.0,
-                    //     onPressed: setState((){isLoading = true;}))
-                    //     : Center(
-                    //   child: CircularProgressIndicator(),
-                    // )
                    Consumer<LoginProvider>(
                      builder: (context,controller,child) {
                        return controller.loading==0 ? MaterialButton(
@@ -113,8 +101,6 @@ class PortraitLoginFormScreen extends StatelessWidget {
                        );
                      }
                    ),
-
-
 
                     SizedBox(
                       height: 60.h,
@@ -150,6 +136,8 @@ class PortraitLoginFormScreen extends StatelessWidget {
     );
 
   }
+
+  // the form of the login and password textfield
   signInForm(){
     return
       Form(

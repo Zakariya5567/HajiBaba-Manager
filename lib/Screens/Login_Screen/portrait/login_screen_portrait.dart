@@ -11,7 +11,6 @@ class PortraitLoginScreen extends StatelessWidget {
   const PortraitLoginScreen({Key key}) : super(key: key);
   @override
   Widget build(BuildContext context) {
-    LoginProvider loginProvider=Provider.of<LoginProvider>(context,listen: false);
     return Scaffold(
         body: Container(
           height: MediaQuery.of(context).size.height,

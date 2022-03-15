@@ -15,16 +15,30 @@ import 'package:http/http.dart' as http;
 import 'package:shared_preferences/shared_preferences.dart';
 
 class LoginApi{
+
+  // firebase auth  is the instance of firebase auth
+  // userModel is the instance of the User model class
+  // FirebaseModel is the instance of the Firebase model class in which i am updating
+  // the firebase messaging token
+  // UpdatePhysicalAddressModel is the instance of UpdatePhysicalAddressModel model class;
+  // isAndroid variable is the store that the device is android ot ios
+  // int userid is the is of the user
+
   FirebaseAuth firebaseAuth = FirebaseAuth.instance;
   UserModel userData;
   FirebaseModel firebaseData;
   UpdatePhysicalAddressModel updatePhysicalAddressModel;
+
   bool isAndroid;
   int userid;
 
+  // the physicalAddress method is to find that the device is android or ios
+  // updatePhysicalAddress function is used to call api and update the user physical address
+  // updateStoreManagerFirebaseId function is used call api and update firebase token
+  // storeManagerLogin function is used to call api to login the user
 
  Future physicalAddress()async{
-
+   // use of device info plus package to find that the device is android or ios
     var deviceInfo = DeviceInfoPlugin();
     if (Platform.isIOS) { // import 'dart:io'
       var iosDeviceInfo = await deviceInfo.iosInfo;
@@ -38,7 +52,6 @@ class LoginApi{
      return deviceId; // unique ID on Android
     }
   }
-
 
   Future<UpdatePhysicalAddressModel> updatePhysicalAddress(int id)async{
    dynamic devicePhysicalAddress=await physicalAddress();

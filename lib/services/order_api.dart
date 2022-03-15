@@ -9,12 +9,16 @@ import 'package:http/http.dart'as http;
 class OrderApi{
 
   // this class is used to get orders(all,pending,processing,complete,ready, order) form api
+  // OrderModel is the instance of Order model class
+  // getAllOrderById function is used to get all order from api
+
+  // getPendingOrderById function is used to get pending order from api
+  // getProcessingOrderById function is used to get processing order from api
+  // getReadyForCollectionOrderById function is used to get ready for collection order from api
+  // getCompleteOrderById function is used to get complete order from api
+  // getCompleteOrderById function is used to get complete order from api
 
   OrderModel orderModel;
-
-  // OrderModel is the model of data which is which are getting from api
-
-  // getAllOrderById function is used to get all order from api
 
   Future<OrderModel> getAllOrderById(context, int allCurrentPage, String searchTerm) async {
 
@@ -41,8 +45,6 @@ class OrderApi{
     return orderModel;
   }
 
-  // getPendingOrderById function is used to get pending order from api
-
   Future<OrderModel> getPendingOrderById(context, int pendingCurrentPage, String searchTerm) async {
 
     SharedPreferencesData sharedPreferencesData=SharedPreferencesData();
@@ -66,8 +68,6 @@ class OrderApi{
     return orderModel;
   }
 
-  // getProcessingOrderById function is used to get processing order from api
-
   Future<OrderModel> getProcessingOrderById(context, int processingCurrentPage, String searchTerm) async {
 
     SharedPreferencesData sharedPreferencesData=SharedPreferencesData();
@@ -90,8 +90,6 @@ class OrderApi{
     }
     return orderModel;
   }
-
-  // getReadyForCollectionOrderById function is used to get ready for collection order from api
 
   Future<OrderModel> getReadyForCollectionOrderById(context, int readyCurrentPage, String searchTerm) async {
 
@@ -119,9 +117,6 @@ class OrderApi{
     return orderModel;
   }
 
-  // getCompleteOrderById function is used to get complete order from api
-
-
   Future<OrderModel> getCompleteOrderById(context, int completeCurrentPage, String searchTerm) async {
 
     SharedPreferencesData sharedPreferencesData=SharedPreferencesData();
@@ -144,8 +139,6 @@ class OrderApi{
     }
     return orderModel;
   }
-
-  // getTodayOrderById function is used to get today order from api
 
   Future<OrderModel> getTodayOrderById(context, int todayCurrentPage, String searchTerm) async {
 

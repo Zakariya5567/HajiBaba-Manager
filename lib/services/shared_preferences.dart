@@ -6,6 +6,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 
 class SharedPreferencesData {
 
+  // login bool is use for login when the login is true the user will be login
+  // if false the user is logout
+  // get data use to get the id of the user
+  // get firebase data is to get the data of the user
+  // clear data is use to clear the data which is store in shared pref
+  // normally used for logout
+
   Future<bool> loginBool()async{
     SharedPreferences sharedPreferences= await SharedPreferences.getInstance();
     bool login = sharedPreferences.getBool('login');

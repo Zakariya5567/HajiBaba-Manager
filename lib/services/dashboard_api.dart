@@ -7,10 +7,10 @@ import 'package:http/http.dart'as http;
 
 class DashboardApi{
 
+  // dashboardModel is the instance of the dashboard model class
+  // storeDashboard function is used to get data from api
   DashboardModel dashboardModel;
-
   Future<DashboardModel> storeDashboard(context) async {
-
     SharedPreferencesData sharedPreferencesData=SharedPreferencesData();
     final data= await sharedPreferencesData.getFirebaseData();
     int id=data['data']['storeId'];

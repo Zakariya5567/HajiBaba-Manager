@@ -4,8 +4,10 @@ import 'package:haji_baba_manager/Model/order_detail_model.dart';
 import 'package:haji_baba_manager/Utils/api_url.dart';
 import 'package:http/http.dart'as http;
 class OrderDetailApi{
-  OrderDetailModel orderDetailModel;
+  //OrderDetailModel is the instance of OrderDetailModel class
+  //getOrderDetailData is a function to get order detail from the api
 
+  OrderDetailModel orderDetailModel;
 
   Future<OrderDetailModel> getOrderDetailData(context, id) async {
    String orderId=id;

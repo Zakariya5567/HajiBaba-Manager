@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/widgets.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haji_baba_manager/Provider/dashboard_provider.dart';
-import 'package:haji_baba_manager/Provider/internet_provider.dart';
 import 'package:haji_baba_manager/Provider/order_detail_provider.dart';
 import 'package:haji_baba_manager/Provider/order_screen_provider.dart';
 import 'package:haji_baba_manager/Provider/profile_provider.dart';

@@ -1,19 +1,14 @@
-import 'dart:io';
-import 'package:device_info_plus/device_info_plus.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:firebase_messaging/firebase_messaging.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/rendering.dart';
 import 'package:flutter_local_notifications/flutter_local_notifications.dart';
-import 'package:haji_baba_manager/Provider/internet_provider.dart';
-import 'package:haji_baba_manager/Provider/manager_profile_provider.dart';
 import 'package:haji_baba_manager/Provider/order_detail_provider.dart';
 import 'package:haji_baba_manager/Provider/status_provider.dart';
 import 'package:haji_baba_manager/Screens/DashBoard_screen/dash_baord_screen.dart';
 import 'package:haji_baba_manager/Screens/Manager_Profile_Screen/manager_profile_screen.dart';
 import 'package:haji_baba_manager/Screens/Order_Detail_Screen/order_detail_screen.dart';
-import 'package:overlay_support/overlay_support.dart';
 import 'package:provider/provider.dart';
 import 'Provider/dashboard_provider.dart';
 import 'Provider/login_provider.dart';
@@ -35,17 +30,19 @@ const AndroidNotificationChannel channel = AndroidNotificationChannel(
   playSound: true,
 );
 
+// to use local notification  use this (creating instance of the flutter
+// local notification package)
+
 final FlutterLocalNotificationsPlugin flutterLocalNotificationsPlugin =
 FlutterLocalNotificationsPlugin();
 
-
+// when the app is in background  this statement will be use for notification
 Future<void> backgroundHandler(RemoteMessage message) async{
   await Firebase.initializeApp();
 }
 
 Future<void> main()async{
 
-  // this steps is use to get the firebase token
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp();
 
@@ -54,37 +51,25 @@ Future<void> main()async{
   // when the app is closed running on background
   FirebaseMessaging.onBackgroundMessage(backgroundHandler);
 
+ // for local notification use this statement
   await flutterLocalNotificationsPlugin
       .resolvePlatformSpecificImplementation<AndroidFlutterLocalNotificationsPlugin>()
       ?.createNotificationChannel(channel);
+
+  // for foreground(when the app is in foreground and notification arise this
+  // statement will be executed
 
   await FirebaseMessaging.instance.setForegroundNotificationPresentationOptions(
     alert: true, // Required to display a heads up notification
     badge: true,
     sound: true,
   );
+
   // to get the firebase token use this function
   FirebaseMessaging.instance.getToken().then((value) {
-    String token = value;
-    print("firebase token is :${token}");
   });
 //====================================================================================
-  // this steps is used to get the device physical address
-
-    var deviceInfo = DeviceInfoPlugin();
-    if (Platform.isIOS) { // import 'dart:io'
-      var iosDeviceInfo = await deviceInfo.iosInfo;
-      var deviceId=iosDeviceInfo.identifierForVendor;
-      print(" ios device : ${deviceId}");
-    //  return deviceId; // unique ID on iOS
-    } else {
-      var androidDeviceInfo = await deviceInfo.androidInfo;
-      var deviceId=androidDeviceInfo.androidId;
-      print("android device ${deviceId}");
-    //  return deviceId; // unique ID on Android
-    }
-
-
+// using of multi provider
   runApp(
       MultiProvider(providers: [
         ChangeNotifierProvider<LoginProvider>(create: (context)=>LoginProvider()),
@@ -92,11 +77,7 @@ Future<void> main()async{
         ChangeNotifierProvider<OrderProvider>(create: (context)=>OrderProvider()),
         ChangeNotifierProvider<OrderDetailProvider>(create: (context)=>OrderDetailProvider()),
         ChangeNotifierProvider<DashboardProvider>(create: (context)=>DashboardProvider()),
-        ChangeNotifierProvider<ManagerProfileProvider>(create: (context)=>ManagerProfileProvider()),
-        ChangeNotifierProvider<InternetProvider>(create: (context)=>InternetProvider()),
         ChangeNotifierProvider<StatusProvider>(create: (context)=>StatusProvider()),
-
-
       ],
         child:const MyApp() ,
       )
@@ -116,6 +97,8 @@ class _MyAppState extends State<MyApp> {
     // TODO: implement initState
     super.initState();
 
+    // use for push notification
+    // to listen for the message / notification
     FirebaseMessaging.onMessage.listen((RemoteMessage message) {
       RemoteNotification notification = message.notification;
       AndroidNotification android = message.notification?.android;
@@ -142,13 +125,15 @@ class _MyAppState extends State<MyApp> {
 
   @override
   Widget build(BuildContext context) {
+    //screen utils is a package which are used for screen responsiveness
+    //The design size is used for tablet
+
     return ScreenUtilInit(
-      //The design size is used for tablet
       designSize: const Size(1200, 2000),
       minTextAdapt: true,
       splitScreenMode: true,
-      builder: () =>  OverlaySupport.global(
-        child: MaterialApp(
+      builder: () =>
+        MaterialApp(
             builder: (context, widget) {
               ScreenUtil.setContext(context);
               return MediaQuery(
@@ -170,7 +155,7 @@ class _MyAppState extends State<MyApp> {
               '/managerProfileScreen':(context)=> ManagerProfileScreen(),
             },
           ),
-      ),
+
 
     );
   }

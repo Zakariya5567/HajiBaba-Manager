@@ -2,14 +2,12 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:haji_baba_manager/Provider/dashboard_provider.dart';
-import 'package:haji_baba_manager/Provider/internet_provider.dart';
 import 'package:haji_baba_manager/Provider/order_detail_provider.dart';
 import 'package:haji_baba_manager/Provider/order_screen_provider.dart';
 import 'package:haji_baba_manager/Provider/status_provider.dart';
 import 'package:haji_baba_manager/Utils/const_style.dart';
 import 'package:haji_baba_manager/Utils/const_text.dart';
 import 'package:haji_baba_manager/Widgets/bottom_navigation_bar/Portrait_bottom_navigation_bar/portrait_bottom_navigation_bar_main.dart';
-import 'package:haji_baba_manager/Widgets/side_menu_bar/portrait_side_bar/portrait_side_bar.dart';
 import 'package:haji_baba_manager/Widgets/side_menu_bar/side_menu_bar.dart';
 import 'package:intl/intl.dart';
 import 'package:provider/provider.dart';
@@ -18,22 +16,17 @@ import 'package:pull_to_refresh/pull_to_refresh.dart';
 class PortraitOrderScreen extends StatelessWidget {
   PortraitOrderScreen({Key key}) : super(key: key);
 
-  // internet provider is the instance of  internet connection class
   // refresh controller is the  the controller of smart resfresher (use for pagination)
   // TextEditingController is the controller of search
 
-  //InternetProvider internetProvider = InternetProvider();
-  RefreshController refreshController =
-      RefreshController(initialRefresh: false);
+  RefreshController refreshController = RefreshController(initialRefresh: false);
   TextEditingController searchController = TextEditingController();
 
   @override
   Widget build(BuildContext context) {
-    // calling to internet provider class to check the internet connection
+
     //status provider is the instance of status provider class to call api to get all status
     // which are display in dropdown button
-
-    //internetProvider.internetChecker(context);
 
     final statusProvider = Provider.of<StatusProvider>(context, listen: false);
     statusProvider.getAllStatus(context);
@@ -41,17 +34,21 @@ class PortraitOrderScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: Colors.grey.shade300,
       appBar: AppBar(
-        // the orderScreenAppBar is the function to display the app bar in the screen
 
+        // the orderScreenAppBar is the function to display the app bar in the screen
         title: orderScreenAppBar(context),
         toolbarHeight: 350.h,
         automaticallyImplyLeading: false,
         backgroundColor: Colors.white,
       ),
-      drawer: const SideMenuBar(),
       body: Consumer<OrderProvider>(builder: (context, orderController, child) {
         return orderController.isLoading == 0
             ? SmartRefresher(
+          // SmartRefresher is a widget(package) which is used for pagination
+          // the footer is used for a message in which will be display in the bottom
+          // onLoading is used for when pull up the the page and load some data from the api
+          // the if statement is used for to load data on which screen
+
                 enablePullUp: true,
                 enablePullDown: false,
                 footer: CustomFooter(
@@ -93,23 +90,28 @@ class PortraitOrderScreen extends StatelessWidget {
                     orderController.refresh = refreshController;
                     orderController.allCurrentPage++;
                     orderController.getAllOrder(context);
-                  } else if (orderController.showOrders == "pending") {
+                  }
+                  else if (orderController.showOrders == "pending") {
                     orderController.refresh = refreshController;
                     orderController.pendingCurrentPage++;
                     orderController.getPendingOrder(context);
-                  } else if (orderController.showOrders == "processing") {
+                  }
+                  else if (orderController.showOrders == "processing") {
                     orderController.refresh = refreshController;
                     orderController.processingCurrentPage++;
                     orderController.getProcessingOrder(context);
-                  } else if (orderController.showOrders == "ready") {
+                  }
+                  else if (orderController.showOrders == "ready") {
                     orderController.refresh = refreshController;
                     orderController.readyCurrentPage++;
                     orderController.getReadyForCollectionOrder(context);
-                  } else if (orderController.showOrders == "complete") {
+                  }
+                  else if (orderController.showOrders == "complete") {
                     orderController.refresh = refreshController;
                     orderController.completeCurrentPage++;
                     orderController.getCompleteOrder(context);
-                  } else if (orderController.showOrders == "today") {
+                  }
+                  else if (orderController.showOrders == "today") {
                     orderController.refresh = refreshController;
                     orderController.todayCurrentPage++;
                     orderController.getTodayOrder(context);
@@ -120,6 +122,13 @@ class PortraitOrderScreen extends StatelessWidget {
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
+
+                    //in this class there are 6 types of list i have set the controller
+                    // on provider class when the user click on whiich button the controller
+                    // save this name of the list and it will show only that list in the scree
+                    //e.g if the user click on pending button it will navigate to the same class
+                    // and show the list of the pending only
+
                     children: [
                       if (orderController.showOrders == "pending")
                         pendingOrders(context)
@@ -427,7 +436,7 @@ class PortraitOrderScreen extends StatelessWidget {
                                 style: orderStatusStyle(),
                               ),
                               sizedBox20(),
-                              //  detail button
+                              //  detail button to navigate to detail screen
                               Consumer<OrderDetailProvider>(builder:
                                   (context, orderDetailController, child) {
                                 return GestureDetector(
@@ -459,6 +468,7 @@ class PortraitOrderScreen extends StatelessWidget {
                             ],
                           ),
                         ),
+                        // here is the dropdown of the status
                         Container(
                           width: 40.w,
                           height: 70,
@@ -1514,6 +1524,17 @@ class PortraitOrderScreen extends StatelessWidget {
 
 //========================================================================================
   //methods
+  // sized box is the function use for space between the widgets
+  // listTextStyle use for those text which is present in today order list
+  //orderIdStyle is the text style of id in the list
+  //orderNumberStyle is the style of the order number
+  //dropDownTextStyle is the text style of the dropdown
+  //orderPriceStyle is the style of price in the list
+  //orderStatusStyle is the style of status in the list
+  //detailButtonTextStyle is the style of detail button text in the list
+  // getFormattedDate use to format the date which is present in the list
+  //loadingIndicator is used for progress indicator
+ // refresherTextStyle  is the text style of refresh controller
 
   String getFormattedDate(String date) {
     /// Convert into local date format.

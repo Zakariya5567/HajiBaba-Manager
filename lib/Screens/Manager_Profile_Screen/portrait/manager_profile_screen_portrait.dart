@@ -14,18 +14,13 @@ import 'package:shared_preferences/shared_preferences.dart';
 class PortraitManagerProfileScreen extends StatelessWidget {
   PortraitManagerProfileScreen({Key key}) : super(key: key);
 
-  //InternetProvider internetProvider=InternetProvider();
-
   @override
   Widget build(BuildContext context) {
-   // internetProvider.internetChecker(context);
     var screenWidth = MediaQuery.of(context).size.width;
     var screenHeight = MediaQuery.of(context).size.height;
     return
       Scaffold(
-        drawer: const SideMenuBar(),
         backgroundColor: Colors.grey.shade300,
-      //  drawer: const SideMenuBar(),
         body: Consumer<ProfileProvider>(
             builder: (context,controller,child) {
             return  Stack(children: [
@@ -63,6 +58,11 @@ class PortraitManagerProfileScreen extends StatelessWidget {
         bottomNavigationBar: PortraitBottomNavigationBar(),
       );
   }
+
+  // profileAppBar method is used to show the app bar of the screen
+  // managerDetail is to show the detail of the user / manager
+  // changePasswordDialog is the pop up dialog when the user click on the
+  // reset password button
 
   Widget profileAppBar(BuildContext context, double screenWidth ) {
     return  Container(
@@ -211,7 +211,6 @@ class PortraitManagerProfileScreen extends StatelessWidget {
 
   }
 
-
   changePasswordDialog(BuildContext context, ) {
     AlertDialog alert = AlertDialog(
       backgroundColor: ConstStyle.cardGreyColor,
@@ -275,6 +274,14 @@ class PortraitManagerProfileScreen extends StatelessWidget {
       },
     );
   }
+
+
+  // sizedBox is the function which are used for the space
+  // greyTextStyle is the text style of the screen
+  // blackTextStyle is the text style of the screen
+  // resetGreyStyle and resetBlackStyle is the text style of the popup
+  // which will show up when the user click on reset button
+  // loadingIndicator is the progress indicator of the screen
 
   sizedBox20(){
     return SizedBox(height: 20.sp);

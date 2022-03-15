@@ -6,17 +6,24 @@ import 'package:haji_baba_manager/Widgets/connection_checker_dialog.dart';
 import 'package:haji_baba_manager/services/connection_checker.dart';
 import 'package:haji_baba_manager/services/profile_data_api.dart';
 import 'package:haji_baba_manager/services/shared_preferences.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
-import 'package:overlay_support/overlay_support.dart';
+
 class ProfileProvider extends ChangeNotifier{
+
+  //ProfileApi is instance of the ProfileApi class
+  //profileData to store the data of the profile
+  // isLoading and loading is used for wait when the data is loading from api
+  //email is to store the email of the user
+  //
 
  ProfileApi profileApi=ProfileApi();
  Map profileData={};
  int isLoading=0;
-
  String email;
- bool connection=false;
 
+ loading(int load){
+   isLoading=load;
+   notifyListeners();
+ }
 
  Future<void> userEmail()async{
    SharedPreferencesData sharedPreferencesData=SharedPreferencesData();
@@ -25,14 +32,13 @@ class ProfileProvider extends ChangeNotifier{
  }
 
 
- loading(int load){
-   isLoading=load;
-   notifyListeners();
- }
+
  //Connection checker is the instance of connection checker class
  // in which we are listening that the internet in connected or not
  //ConnectionCheckerDialog is the instance of ConnectionCheckerDialog class
  // if the network is not connected the alert dialog will be popup
+ // getProfileData to get the user profile data from the api
+ //restPassword is to call the api and request to change the password
 
  ConnectionChecker connectionChecker=ConnectionChecker();
  ConnectionCheckerDialog connectionCheckerDialog=ConnectionCheckerDialog();

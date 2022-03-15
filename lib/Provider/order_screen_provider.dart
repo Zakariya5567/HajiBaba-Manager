@@ -1,13 +1,20 @@
 import 'package:flutter/material.dart';
 import 'package:haji_baba_manager/Model/order_model.dart';
-import 'package:haji_baba_manager/Provider/internet_provider.dart';
 import 'package:haji_baba_manager/Widgets/connection_checker_dialog.dart';
 import 'package:haji_baba_manager/services/connection_checker.dart';
 import 'package:haji_baba_manager/services/order_api.dart';
-import 'package:haji_baba_manager/services/shared_preferences.dart';
-import 'package:internet_connection_checker/internet_connection_checker.dart';
 import 'package:pull_to_refresh/pull_to_refresh.dart';
 class OrderProvider extends ChangeNotifier{
+
+  //OrderApi is the instance of OrderApi class
+  // pendingList is a list to store the list data of pending orders
+  // processingList is a list to store the list data of processing orders
+  // readyForCollectionList is a list to store the list ready for collection of pending orders
+  // completeList is a list to store the list data of complete orders
+  // allOrderList is a list to store the list data of all  orders
+  // todayList is a list to store the list data of today orders
+
+  // isLoading and loading is used for the wait one the api data is loading
 
   OrderApi orderApi=OrderApi();
 
@@ -18,11 +25,6 @@ class OrderProvider extends ChangeNotifier{
   List allOrderList=[];
   List todayList=[];
 
-
-
-  // =================================================================================
-  // this function is used to progress indicator on screen
-
   int isLoading=0;
 
   loading(int load){
@@ -32,6 +34,7 @@ class OrderProvider extends ChangeNotifier{
 
   // =================================================================================
   // to change the color of button in sidebar
+  // the function is used the update variable is runtime
   bool pendingColor=false;
   bool processingColor=false;
   bool readyColor=false;
@@ -65,6 +68,8 @@ class OrderProvider extends ChangeNotifier{
 
   // =================================================================================
   // this function is used to change th method(pending,all,completed,ready,processing)
+  // showOrders is to store the the name of the screen on run time when the user navigate
+  // from one screen to another
 
   String showOrders="";
 
@@ -73,12 +78,15 @@ class OrderProvider extends ChangeNotifier{
     notifyListeners();
   }
   // =================================================================================
-  // this function is used to change th method(pending,all,completed,ready,processing)
-  
+  // this function is used to change the  method(pending,all,completed,ready,processing)
+  // current page is use for pagination
+  // total page is used for pagination
+  // refresh controller is used for pagination and the instance of refresh controller
+  // search page is used to set on which page the user is searching for data
+  // search data is used to store the text inside the search field which the user want to search
 
   int allCurrentPage=1, pendingCurrentPage=1, processingCurrentPage=1,
       readyCurrentPage=1,completeCurrentPage=1,todayCurrentPage=1;
-
   int totalPages;
 
   RefreshController refresh;
@@ -96,10 +104,18 @@ class OrderProvider extends ChangeNotifier{
     notifyListeners();
   }
 
+
   //Connection checker is the instance of connection checker class
   // in which we are listening that the internet in connected or not
   //ConnectionCheckerDialog is the instance of ConnectionCheckerDialog class
   // if the network is not connected the alert dialog will be popup
+
+  // getAllOrder method to call the api and get all order list from api
+  // getPendingOrder method to call the api and get pending order list from api
+  // getProcessingOrder method to call the api and get processing order list from api
+  // getReadyForCollectionOrder method to call the api and ready order list from api
+  // getCompleteOrder method to call the api and get complete list from api
+  // getTodayOrder method to call the api and get all today list from api
 
  ConnectionChecker connectionChecker=ConnectionChecker();
   ConnectionCheckerDialog connectionCheckerDialog=ConnectionCheckerDialog();
