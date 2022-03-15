@@ -1,0 +1,72 @@
+import 'package:flutter/material.dart';
+import 'package:haji_baba_manager/Model/all_status_list_model.dart';
+import 'package:haji_baba_manager/Model/update_order_status_model.dart';
+import 'package:haji_baba_manager/Widgets/connection_checker_dialog.dart';
+import 'package:haji_baba_manager/services/connection_checker.dart';
+import 'package:haji_baba_manager/services/order_status_api.dart';
+class StatusProvider extends ChangeNotifier{
+
+  OrderStatusApi orderStatusApi=OrderStatusApi();
+
+  List statusList=[];
+  String selectedValue='';
+
+  int isLoading=0;
+
+  int id=0;
+
+  loading(int load){
+    isLoading=load;
+    notifyListeners();
+  }
+
+  changeValue(String newValue){
+    selectedValue=newValue;
+    notifyListeners();
+  }
+
+  changeId(int newId){
+    id=newId;
+    notifyListeners();
+  }
+
+  //Connection checker is the instance of connection checker class
+  // in which we are listening that the internet in connected or not
+  //ConnectionCheckerDialog is the instance of ConnectionCheckerDialog class
+  // if the network is not connected the alert dialog will be popup
+
+  ConnectionChecker connectionChecker=ConnectionChecker();
+  ConnectionCheckerDialog connectionCheckerDialog=ConnectionCheckerDialog();
+
+
+  getAllStatus(context) async {
+    bool connection=await connectionChecker.checkNetwork();
+    if(connection==true){
+      AllStatusListModel statusListModel =await orderStatusApi.getAllStatusList(context);
+      Map data=statusListModel.toJson();
+      List list =data['data'];
+      statusList=list.toList(growable: true);
+      notifyListeners();
+      return statusListModel;
+    }
+    else{
+      connectionCheckerDialog.showConnectionDialog(context);
+    }
+  }
+
+
+  updateOrderStatus(int statusId ,String orderId, BuildContext context) async {
+    bool connection=await connectionChecker.checkNetwork();
+    if(connection==true){
+     UpdateStatusModel updateOrderStatusModel =
+     await orderStatusApi.updateStatusById(statusId, orderId);
+      notifyListeners();
+      return updateOrderStatusModel;
+    }
+    else{
+      connectionCheckerDialog.showConnectionDialog(context);
+    }
+
+  }
+
+}

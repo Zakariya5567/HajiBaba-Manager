@@ -1,0 +1,47 @@
+{
+  "project_info": {
+    "project_number": "356170150813",
+    "project_id": "haji-baba-manager",
+    "storage_bucket": "haji-baba-manager.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:356170150813:android:225363eadba273a6673574",
+        "android_client_info": {
+          "package_name": "com.example.haji_baba_manager"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "356170150813-bv9l3bq7h0r3c0jja8pm8fksfjo7b86i.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "com.example.haji_baba_manager",
+            "certificate_hash": "e924e6b132fc9fa9d5c1bd2f563ece46d1c4fb7c"
+          }
+        },
+        {
+          "client_id": "356170150813-oi3qu4f8eedam5jcqebc3bgkhtonb172.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDAoBXcw1ypn4nk_9L1ZegDt29ej-qksC4"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "356170150813-oi3qu4f8eedam5jcqebc3bgkhtonb172.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
